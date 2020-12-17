@@ -1,5 +1,5 @@
 import './styles.css';
-import pokemonCardTpl from './templates/countries-card.hbs';
+import countriesCardTpl from './templates/countries-card.hbs';
 import API from './js/fetchCountries';
 import getRefs from './js/get-refs';
 
@@ -19,8 +19,8 @@ function onSearch(e) {
     .finally(() => form.reset());
 }
 
-function renderPokemonCard(pokemon) {
-  const markup = pokemonCardTpl(pokemon);
+function renderCountriesCard(name) {
+  const markup = countriesCardTpl(name[0]);
   refs.cardContainer.innerHTML = markup;
 }
 
