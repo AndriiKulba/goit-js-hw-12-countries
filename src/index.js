@@ -11,12 +11,6 @@ import * as PNotifyMobile from '@pnotify/mobile';
 import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/Material.css';
 
-defaultModules.set(PNotifyMobile, {});
-
-alert({
-  text: 'Такой страны не найдено, введите более точный запрос',
-});
-
 const refs = getRefs();
 refs.searchForm.addEventListener('input', onSearch);
 refs.searchForm.addEventListener('submit', onSearch);
@@ -47,7 +41,10 @@ function renderCountriesCard(name) {
 }
 
 function onFetchError(error) {
-  alert('Упс, что-то пошло не так и мы не нашли вашего покемона!');
+  defaultModules.set(PNotifyMobile, {});
+  alert({
+    text: 'Такой страны не найдено, введите более точный запрос',
+  });
 }
 
 const _ = require('lodash');
