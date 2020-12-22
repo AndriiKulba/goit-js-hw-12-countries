@@ -14,15 +14,21 @@ import '@pnotify/core/dist/Material.css';
 const refs = getRefs();
 refs.searchForm.addEventListener('input', onSearch);
 refs.searchForm.addEventListener('submit', onSearch);
+
 function onSearch(e) {
   e.preventDefault();
-  console.log(e);
-  const form = e.currentTarget;
-  const searchQuery = form.elements.query.value;
-  API.fetchCountries(searchQuery)
-    .then(renderCountriesCard)
-    .catch(onFetchError)
-    .finally(() => form);
+  console.dir(debounce(a(e), 50000));
+  function a(e) {
+    console.log(e);
+    const form = e.currentTarget;
+    console.log(form);
+    const searchQuery = form.elements.query.value;
+    console.log(searchQuery);
+    API.fetchCountries(searchQuery)
+      .then(renderCountriesCard)
+      .catch(onFetchError)
+      .finally(() => form);
+  }
 }
 // .finally(() => form.reset());
 function renderCountriesCard(name) {
@@ -32,7 +38,7 @@ function renderCountriesCard(name) {
   if (countElementsObj === 1) {
     const markup = countryCardTpl(name);
     refs.cardContainer.innerHTML = markup;
-  } else if ((countElementsObj > 2) & (countElementsObj < 10)) {
+  } else if ((countElementsObj >= 2) & (countElementsObj < 10)) {
     const markup = countriesCardTpl(name);
     refs.cardContainer.innerHTML = markup;
     const countriesItem = document.querySelectorAll('.list-group-item');
