@@ -1,4 +1,5 @@
 import './styles.css';
+import debounce from 'lodash.debounce';
 import countryCardTpl from './templates/country-card.hbs';
 import countriesCardTpl from './templates/countries-card.hbs';
 import onFetchError from './js/pnotify';
@@ -6,24 +7,21 @@ import API from './js/fetchCountries';
 import getRefs from './js/get-refs';
 
 const refs = getRefs();
-refs.searchForm.addEventListener('input', onSearch);
-refs.searchForm.addEventListener('submit', onSearch);
+refs.searchForm.addEventListener('input', debounce(onSearch, 500));
 
 function onSearch(e) {
   e.preventDefault();
 
-  const form = e.currentTarget;
+  const searchQuery = e.target.value;
 
-  const searchQuery = form.elements.query.value;
-  console.log(searchQuery);
-  API.fetchCountries(searchQuery)
-    .then(renderCountriesCard)
-    .catch(onFetchError)
-    .finally(() => form);
+  API.fetchCountries(searchQuery).then(renderCountriesCard);
+  // .catch(
+  //   onFetchError('Такой страны не найдено, введите более точный запрос'),
+  // );
 }
 // .finally(() => form.reset());
 function renderCountriesCard(result) {
-  console.log(result.length);
+  refs.cardContainer.innerHTML = '';
   const countElements = result.length;
 
   if (countElements === 1) {
@@ -32,21 +30,8 @@ function renderCountriesCard(result) {
   } else if ((countElements >= 2) & (countElements < 10)) {
     const markup = countriesCardTpl(result);
     refs.cardContainer.innerHTML = markup;
-    const countriesItem = document.querySelectorAll('.list-group-item');
-    console.log(countriesItem);
-    countriesItem.addEventListener('click', countryCardTpl(result));
+    // const countriesItem = document.querySelectorAll('.list-group-item');
+    // console.log(countriesItem);
+    // countriesItem.addEventListener('click', countryCardTpl(result));
   }
 }
-
-// =========================================
-
-// const url = 'https://newsapi.org/v2/everything?q=cars';
-// const options = {
-//   headers: {
-//     Authorization: '4330ebfabc654a6992c2aa792f3173a3',
-//   },
-// };
-
-// fetch(url, options)
-//   .then(r => r.json())
-//   .then(console.log);

@@ -4,9 +4,9 @@ import '@pnotify/core/dist/Material.css';
 import '@pnotify/core/dist/Angeler.css';
 import '@pnotify/core/dist/PNotify.css';
 
-function onFetchError() {
+function onFetchError(text) {
   alert({
-    text: 'Такой страны не найдено, введите более точный запрос',
+    text: text,
     type: 'error',
     dir: 'left',
     delay: 1500,
