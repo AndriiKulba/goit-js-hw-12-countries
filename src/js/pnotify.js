@@ -12,7 +12,7 @@ function onFetchError(text) {
     delay: 1500,
     icon: true,
     addClass: 'angeler-extended',
-    width: '370px',
+    width: '480px',
     closer: true,
   });
 }

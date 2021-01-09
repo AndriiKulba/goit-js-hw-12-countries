@@ -15,11 +15,8 @@ function onSearch(e) {
   const searchQuery = e.target.value;
 
   API.fetchCountries(searchQuery).then(renderCountriesCard);
-  // .catch(
-  //   onFetchError('Такой страны не найдено, введите более точный запрос'),
-  // );
 }
-// .finally(() => form.reset());
+
 function renderCountriesCard(result) {
   refs.cardContainer.innerHTML = '';
   const countElements = result.length;
@@ -30,8 +27,7 @@ function renderCountriesCard(result) {
   } else if ((countElements >= 2) & (countElements < 10)) {
     const markup = countriesCardTpl(result);
     refs.cardContainer.innerHTML = markup;
-    // const countriesItem = document.querySelectorAll('.list-group-item');
-    // console.log(countriesItem);
-    // countriesItem.addEventListener('click', countryCardTpl(result));
+  } else if (countElements > 10) {
+    onFetchError('Забагато результатів для видачі, введіть біль точну назву');
   }
 }

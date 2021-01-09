@@ -5,10 +5,10 @@
         <h2 class="card-title"> {{this.name}}</h2>
         <p class="card-text"><b>Capital:</b> {{this.capital}}</p>
         <p class="card-text"><b>Population:</b> {{this.population}}</p>
-        <ul class="list-group"><b>Languages:</b></ul>
-        {{#each this.languages}}
-        <li class="list-lnguages-item">{{name}}</li>
-        {{/each}}
+        <ul class="list-group"><b>Languages:</b>
+            {{#each this.languages}}
+            <li class="list-lnguages-item">{{name}}</li>
+            {{/each}}
         </ul>
         <div class="card-img-flag">
             <img src="{{this.flag}}" alt="{{this.name}}" width="450">

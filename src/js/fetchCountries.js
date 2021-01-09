@@ -5,12 +5,11 @@ function fetchCountries(searchQuery) {
   const url = `${BASE_URL}/name/${searchQuery}`;
   return fetch(url)
     .then(res => {
-      console.log(res);
       if (res.ok) return res.json();
       throw new Error('Error');
     })
     .catch(error => {
-      onFetchError('Такой страны не найдено, введите более точный запрос');
+      onFetchError('Такої країни не найдено, введіть більш точну назву');
       return error;
     });
 }
