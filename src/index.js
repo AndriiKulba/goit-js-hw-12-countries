@@ -13,7 +13,11 @@ function onSearch(e) {
   e.preventDefault();
 
   const searchQuery = e.target.value;
+  console.log(searchQuery);
 
+  if (searchQuery === '') {
+    return;
+  }
   API.fetchCountries(searchQuery).then(renderCountriesCard);
 }
 
@@ -24,10 +28,10 @@ function renderCountriesCard(result) {
   if (countElements === 1) {
     const markup = countryCardTpl(result);
     refs.cardContainer.innerHTML = markup;
-  } else if ((countElements >= 2) & (countElements < 10)) {
+  } else if (countElements >= 2 && countElements <= 10) {
     const markup = countriesCardTpl(result);
     refs.cardContainer.innerHTML = markup;
-  } else if (countElements > 10) {
-    onFetchError('Забагато результатів для видачі, введіть біль точну назву');
+  } else if (countElements > 11) {
+    onFetchError('Забагато результатів для видачі, введіть більш точну назву');
   }
 }
