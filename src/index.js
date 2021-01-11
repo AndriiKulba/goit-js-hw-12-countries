@@ -13,8 +13,8 @@ function onSearch(e) {
   e.preventDefault();
 
   const searchQuery = e.target.value;
-  console.log(searchQuery);
 
+  refs.cardContainer.innerHTML = '';
   if (searchQuery === '') {
     return;
   }
@@ -22,7 +22,6 @@ function onSearch(e) {
 }
 
 function renderCountriesCard(result) {
-  refs.cardContainer.innerHTML = '';
   const countElements = result.length;
 
   if (countElements === 1) {
